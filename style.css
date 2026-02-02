@@ -1,0 +1,65 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+:root {
+    --primary-color: #6E339E;
+    --secondary-color: #CC9900;
+    --text-color: #0B0A07;
+    --background-color: #F1F5F2;
+    --foreground-color: #FFFFFC;
+    --error-color: #FF3F00;
+    --focus-color: #008BF8;
+}
+
+@font-face {
+    font-family: "PrinceValiant";
+    src: 
+        url("fonts/prince_valiant/PrinceValiant.woff2"),
+        url("fonts/prince_valiant/PrinceValiant.woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Manrope", sans-serif;
+}
