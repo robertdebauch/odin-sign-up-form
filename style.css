@@ -61,7 +61,7 @@ body {
 .side-panel {
     width: 40%;
     position: relative;
-    background-image: url(images/key_visual.jpg);
+    background-image: url('images/key_visual.jpg');
     background-position: center;
     border-radius: var(--step-one) 0 0 var(--step-one);
     display: flex;
