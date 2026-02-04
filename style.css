@@ -2,13 +2,18 @@
     --primary-color: #6E339E;
     --secondary-color: #CC9900;
     --text-color: #0B0A07;
-    --background-color: #F1F5F2;
+    --background-color: #f1f5f2;
     --semitransparent-background: hsla(45, 22%, 4%, 0.75);
     --foreground-color: #FFFFFC;
+    --stroke-color: #c4c4c4;
     --error-color: #FF3F00;
+    --error-background: #ff400025;
     --focus-color: #008BF8;
+    --focus-background: #008df825;
+    --success-color: #21A179;
+    --success-background: #21a17825;
 
-    --shadow-color: 135deg 5% 60%;
+    --shadow-color: 135 5% 60%;
 
     --step-one: 1rem;
 
@@ -30,8 +35,8 @@
 
 body {
     font-family: "Manrope", sans-serif;
-    background-color: var(--text-color, #0B0A07);
-    height: 100dvh;
+    background-color: var(--semitransparent-background);
+    height: 100vh;
     display: flex;
 }
 
@@ -39,39 +44,45 @@ body {
 
 .main-wrapper {
     position: relative;
-    background-color: var(--background-color, #F1F5F2);
-    width: 1440px;
-    height: 1024px;
+    background-color: var(--background-color, #f1f5f2);
+    max-width: 1440px;
+    width: 90%;
+    height: auto;
+    min-height: 1024px;
     margin: auto;
     display: flex;
     flex-flow: row nowrap;
 
-    border-radius: var(--step-one);;
+    border-radius: var(--step-one) 0 0 var(--step-one);
 }
 
 /* Side Panel Style */
 
 .side-panel {
-    width: 40%; /* address later */
-
-    background-image: url(/images/key_visual.jpg);
+    width: 40%;
+    position: relative;
+    background-image: url(../images/key_visual.jpg);
     background-position: center;
-    
+    border-radius: var(--step-one) 0 0 var(--step-one);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.side-panel > .logo-container {
-    height: 150px;
+.side-panel>.logo-container {
+    height: auto;
+    min-height: 150px;
     position: relative;
     background-color: var(--semitransparent-background);
-    top: 208px;
-    left: calc(50% / 576px/2);
+    margin-top: 30%;
 
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: center;
     align-items: center;
+    flex: 1;
     gap: 0.5rem;
-    padding: 1rem;
+    padding: var(--step-one);
 }
 
 img[src$=".png"] {
@@ -79,19 +90,18 @@ img[src$=".png"] {
     filter: drop-shadow(1px -2px 8px var(--secondary-color));
 }
 
-img[src$=".png"] + h1 {
+img[src$=".png"]+h1 {
     font-family: 'PrinceValiant';
-    font-size: clamp(var(--step-two), 64px, var(--step-four));
+    font-size: clamp(2rem, 4vw, 4rem);
     color: var(--foreground-color, #FFFFFC);
 }
 
-.side-panel > .copyright {
+.side-panel>.copyright {
     color: var(--foreground-color);
 
     text-align: center;
     position: absolute;
     bottom: var(--step-two);
-    left: calc(20% - 576px/4);
 
 
     background-color: var(--semitransparent-background);
@@ -103,77 +113,195 @@ img[src$=".png"] + h1 {
 .copyright a {
     color: var(--secondary-color);
     text-decoration-line: underline;
-
-    transition: color 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    text-decoration-color: transparent;
+    transition: 
+        color 300ms cubic-bezier(0.19, 1, 0.22, 1),
+        text-decoration-color 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .copyright a:hover {
     color: var(--foreground-color);
+    text-decoration-color: currentColor;
 }
 
 /* Section Style */
-/* 
+
 section {
-    width: 60%; `
+    width: 60%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .description {
     background-color: var(--background-color);
-    font-size: max(var(--step-one), 1em, calc(var(--step-one) + var(--step-half)));
+    font-size: clamp(1rem, 2vw, 1.5rem);
 
     padding: var(--step-three);
-
     display: flex;
     flex-direction: column;
     gap: var(--step-two);
 }
 
-.description > p > span {
+.description>p>span {
     font-size: var(--step-two);
     font-family: 'PrinceValiant';
-    vertical-align: text-bottom;
-    text-shadow: 
-        0 1px 1px var(--primary-color),
-        0 3px 3px var(--secondary-color);
+    vertical-align: -6%;
+    line-height: 1;
 }
 
 form {
-    padding: var(--step-one);
     display: flex;
     flex-flow: column;
-    background-color: #008BF8;
     gap: 1rem;
 }
+
+/* inputs */
 
 .input-wrapper {
     display: flex;
     flex-flow: row wrap;
-    background-color: #6E339E;
     justify-content: flex-start;
-    
-    gap: var(--step-one);
+    background-color: var(--foreground-color, #FFFFFC);
+    gap: calc(var(--step-two) - var(--step-half));
+    padding: var(--step-one) 0 var(--step-two) 0;
+
+    box-shadow:
+        0 1px 1.4px hsl(var(--shadow-color) / 0.03),
+        0 1.6px 2.3px -0.2px hsl(var(--shadow-color) / 0.14),
+        0 3.1px 4.5px -0.4px hsl(var(--shadow-color) / 0.25);
 }
 
-.input-wrapper > h2 {
+.input-wrapper>.form-description {
     flex: 100%;
+    padding-bottom: var(--step-quarter);
 }
 
-.input-wrapper > .form-block {
+.form-description>p>span {
+    color: var(--primary-color);
+    padding: 0 0.25rem;
+    font-weight: 900;
+}
+
+.input-wrapper>.form-block {
+    display: flex;
+    flex: 0 1 calc(50% - (var(--step-two) - var(--step-half)) / 2);
+    flex-direction: column;
+    gap: var(--step-quarter);
+}
+
+
+.form-block>label {
+    font-weight: 500;
+    font-size: 0.7rem;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+label+input {
+    border: 1px solid var(--stroke-color);
+    border-radius: var(--step-quarter);
+    padding-left: var(--step-half);
+    height: 2rem;
+}
+
+/* button */
+
+form>.form-button {
     display: flex;
     flex-direction: column;
-    gap: var(--step-half);
+    padding-top: var(--step-one);
+    gap: calc(var(--step-one) + var(--step-half));
 }
 
-.input-wrapper > .form-block:nth-child(odd) {
-    margin-left: var(--step-two);
+.form-button>button[type="submit"] {
+    width: min(16rem, 60%);
+
+    padding: calc(var(--step-quarter)*3) var(--step-quarter);
+    background-color: var(--primary-color);
+    color: var(--foreground-color);
+    font-family: inherit;
+
+    font-size: clamp(.75rem, 1rem, 1.5rem);
+
+    font-weight: 600;
+    border: none;
+    border-radius: var(--step-half);
+
+    box-shadow:
+        0px 1px 1.4px hsl(var(--shadow-color) / 0.03),
+        0px 3.8px 5.5px -0.1px hsl(var(--shadow-color) / 0.12),
+        0.1px 7.6px 10.9px -0.3px hsl(var(--shadow-color) / 0.2),
+        0.1px 15px 22.6px -0.4px hsl(var(--shadow-color) / 0.29);
+
+    transition:
+        box-shadow 0.3s,
+        background-color 0.3s ease-in-out;
 }
 
+.form-button>button[type="submit"]:hover {
+    background-color: var(--secondary-color);
+    box-shadow:
+        0px 1px 1.4px hsl(var(--shadow-color) / 0.13),
+        0px 3.8px 5.5px -0.1px hsl(var(--shadow-color) / 0.22),
+        0.1px 7.6px 10.9px -0.3px hsl(var(--shadow-color) / 0.4),
+        0.1px 15px 22.6px -0.4px hsl(var(--shadow-color) / 0.6);
+}
 
+.form-button>span {
+    font-weight: 500;
+}
 
-.description, form {
-    padding-left: var(--step-four);
-    padding-right: calc(var(--step-four) * 2);
-} */
+.form-button>span>a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.form-button>span>a:hover {
+    text-decoration: underline;
+}
+
+/* validation */
+
+input:user-invalid {
+    border: 1px solid var(--error-color);
+    background-color: var(--error-background);
+}
+
+input:user-valid {
+    border: 1px solid var(--success-color);
+    background-color: var(--success-background);
+}
+
+input:focus {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+    border: 1px solid var(--focus-color);
+    background-color: var(--focus-background);
+    box-shadow:
+        0px 1px 1.4px hsl(var(--shadow-color) / 0.03),
+        0px 3.8px 5.5px -0.1px hsl(var(--shadow-color) / 0.12),
+        0.1px 7.6px 10.9px -0.3px hsl(var(--shadow-color) / 0.2),
+        0.1px 15px 22.6px -0.4px hsl(var(--shadow-color) / 0.29);
+}
+
+input:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 4px;
+}
+
+.input-wrapper,
+.form-button {
+    padding-left: var(--step-three);
+    padding-right: var(--step-three);
+}
